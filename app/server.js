@@ -1,11 +1,16 @@
-var http = require("http"),
-    port = 1234;
+var express = require('express'),
+    app = express(),
+    http = require("http"),
+    fs = require("fs"),
+    port = 3000,
+    entrypoint = __dirname + "/public/charts/dashboard.html";
 
-var server = http.createServer(function(request,response){
-    response.writeHeader(200, {"Content-Type": "text/plain"});
-    response.write("Hello HTTP!");
-    response.end();
+app.use(express.static(__dirname + '/public'));
+
+app.get('/', function (req, res) {
+    res.sendFile(entrypoint);
 });
 
-server.listen(port);
-console.log("Server Running on "+port+".\nLaunch http://localhost:"+port);
+app.listen(port, function () {
+    console.log('Example app listening on port ' + port + '!\nLaunch http://localhost:' + port);
+});
