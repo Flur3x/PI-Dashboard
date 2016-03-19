@@ -7,7 +7,7 @@ $(function () {
             text: 'Average Monthly Temperature and Rainfall in Tokyo'
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: 'Source: Raspberry Pi 2, Sensor: B15UH50'
         },
         xAxis: [{
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',

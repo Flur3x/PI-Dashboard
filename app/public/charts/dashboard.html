@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <title>PI Dashboard</title>
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="../libraries/highcharts/highcharts.js"></script>
     <script src="../libraries/highcharts/themes/dark-unica.js"></script>
     <script src="../charts/temperature.js"></script>
 </head>
 <body>
-<div id="container" style="width:100%; height:400px;"></div>
+<div id="container" style="width:100%; height:95vh;"></div>
+<script>
+    var socket = io.connect('http://localhost:3000');
+
+    socket.on('connect', function() {
+        socket.emit('join', navigator.userAgent);
+    });
+
+    $(function () {
+        var chart = $('#container').highcharts();
+
+        socket.on('data', function(data) {
+            chart.series[1].addPoint(data);
+        });
+    });
+</script>
 </body>
 </html>
